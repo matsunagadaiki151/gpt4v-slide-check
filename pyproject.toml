@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "gpt4v-slide-check"
+version = "0.1.0"
+description = ""
+authors = ["matsunagadaiki151 <38464576+matsunagadaiki151@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "gpt4v_slide_check"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "^1.2.3"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
