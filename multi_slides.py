@@ -3,6 +3,9 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import glob
 
+# スライド一式を添削してもらうためのプログラム
+# 詳細な添削と100点満点中何点かを添削してもらえる。
+
 load_dotenv(".env")
 
 client = OpenAI()

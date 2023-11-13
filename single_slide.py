@@ -2,6 +2,9 @@ import base64
 from openai import OpenAI
 from dotenv import load_dotenv
 
+# タイトルスライドを添削してもらうためのプログラム
+# 詳細な添削と100点満点中何点かを添削してもらえる。
+
 # OPENAI_API_KEYを利用するために必要
 load_dotenv(".env")
 
@@ -13,12 +16,15 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode("utf-8")
 
 
+presenter_name = "{PRESENTER_NAME}"
+
+
 # パワーポイントのタイトルのスライド(手動でpngに変換)
 base64_image = encode_image("images/slide.png")
 
-prompt = """
+prompt = f"""
 以下はAI勉強会で発表する予定のスライドのタイトルです。このタイトルスライドのデザインを添削してください。
-なお、「giranaga」は発表者の名前です。
+なお、{presenter_name}は発表者の名前です。
 また、このスライドの総合点を100点満点でつけてください。
 """
 
