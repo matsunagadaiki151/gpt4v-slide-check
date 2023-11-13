@@ -2,7 +2,6 @@ import base64
 from openai import OpenAI
 from dotenv import load_dotenv
 import glob
-from pprint import pprint
 
 load_dotenv(".env")
 
