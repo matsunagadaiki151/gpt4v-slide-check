@@ -2,6 +2,8 @@ import base64
 from openai import OpenAI
 from dotenv import load_dotenv
 
+from utils.load_yaml import load_model_name
+
 # タイトルスライドを添削してもらうためのプログラム
 # 詳細な添削と100点満点中何点かを添削してもらえる。
 
@@ -9,6 +11,8 @@ from dotenv import load_dotenv
 load_dotenv(".env")
 
 client = OpenAI()
+
+model_name = load_model_name()
 
 
 def encode_image(image_path):
@@ -20,7 +24,7 @@ presenter_name = "{PRESENTER_NAME}"
 
 
 # パワーポイントのタイトルのスライド(手動でpngに変換)
-base64_image = encode_image("images/slide.png")
+base64_image = encode_image("images/bad_slide.png")
 
 prompt = f"""
 以下はAI勉強会で発表する予定のスライドのタイトルです。このタイトルスライドのデザインを添削してください。
@@ -29,7 +33,7 @@ prompt = f"""
 """
 
 response = client.chat.completions.create(
-    model="gpt-4-vision-preview",
+    model=model_name,
     messages=[
         {
             "role": "user",

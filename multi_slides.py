@@ -3,6 +3,8 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import glob
 
+from utils.load_yaml import load_model_name
+
 # スライド一式を添削してもらうためのプログラム
 # 詳細な添削と100点満点中何点かを添削してもらえる。
 
@@ -10,10 +12,11 @@ load_dotenv(".env")
 
 client = OpenAI()
 
-
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode("utf-8")
+    
+model_name = load_model_name()
 
 
 prompt = """
@@ -23,7 +26,7 @@ prompt = """
 """
 
 # スライド一覧
-slides = sorted(glob.glob("images/slides/slide*.png"))
+slides = sorted(glob.glob("images/bad_slides/bad_slide*.png"))
 
 # contentプロパティを動的に生成する。
 contents = [{"type": "text", "text": prompt}]
@@ -39,7 +42,7 @@ for slide in slides:
     contents.append(image_prop)
 
 response = client.chat.completions.create(
-    model="gpt-4-vision-preview",
+    model=model_name,
     messages=[{"role": "user", "content": contents}],
     temperature=0,
     # 多めにしておくといいかも
